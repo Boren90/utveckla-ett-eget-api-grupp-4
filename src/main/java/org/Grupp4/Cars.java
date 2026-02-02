@@ -21,20 +21,35 @@ public class Cars {
     private String carBrand;
     @NotEmpty(message = "Every car has a name, and it's missing here!")
     private String carModel;
-    @Size(min = 1920, max = 2026)
     private int year;
     @Size(min = 0)
     private String value;
     private String img;
     @Column(length = 300)
     private String trivia;
+    
+    public Long getId() {
+        return id;
+    }
 
-    public UUID getId() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public UUID getVinNumber() {
         return vinNumber;
     }
 
-    public void setId(UUID vinNumber) {
+    public void setVinNumber(UUID vinNumber) {
         this.vinNumber = vinNumber;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
     }
 
     public String getCarBrand() {
@@ -43,14 +58,6 @@ public class Cars {
 
     public void setCarBrand(String carBrand) {
         this.carBrand = carBrand;
-    }
-
-    public String getModelName() {
-        return carModel;
-    }
-
-    public void setModelName(String carModel) {
-        this.carModel = carModel;
     }
 
     public int getYear() {

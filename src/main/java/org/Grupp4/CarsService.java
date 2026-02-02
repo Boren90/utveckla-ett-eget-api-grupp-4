@@ -1,6 +1,7 @@
 package org.Grupp4;
 
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -21,5 +22,10 @@ public class CarsService {
         return cars;
     }
 
-   // @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional(Transactional.TxType.REQUIRED)
+        public Cars createCar(Cars cars) {
+            cars.setVinNumber(UUID.randomUUID());
+            entityManager.persist(cars);
+            return cars;
+        }
 }
