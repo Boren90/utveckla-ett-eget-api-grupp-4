@@ -11,34 +11,46 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-
 @Entity
-@Table(name = "4_cars")
 public class Cars {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
+    private UUID vinNumber;
     @NotEmpty(message = "Every car has a name, and it's missing here!")
-    private String modelName;
-    @Size(min=1920, max=2026)
+    private String carBrand;
+    @NotEmpty(message = "Every car has a name, and it's missing here!")
+    private String carModel;
+    @Size(min = 1920, max = 2026)
     private int year;
-    @Size(min=0)
-    private int value;
+    @Size(min = 0)
+    private String value;
     private String img;
     @Column(length = 300)
     private String trivia;
 
-
     public UUID getId() {
-        return id;
+        return vinNumber;
+    }
+
+    public void setId(UUID vinNumber) {
+        this.vinNumber = vinNumber;
+    }
+
+    public String getCarBrand() {
+        return carBrand;
+    }
+
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
     }
 
     public String getModelName() {
-        return modelName;
+        return carModel;
     }
 
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    public void setModelName(String carModel) {
+        this.carModel = carModel;
     }
 
     public int getYear() {
@@ -49,11 +61,11 @@ public class Cars {
         this.year = year;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
@@ -73,5 +85,4 @@ public class Cars {
         this.trivia = trivia;
     }
 
-    
 }
