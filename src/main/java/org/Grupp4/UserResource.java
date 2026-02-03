@@ -1,9 +1,12 @@
 package org.Grupp4;
 
+import java.util.List;
 import java.util.UUID;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -14,11 +17,28 @@ import jakarta.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
+    @Inject
+    UserService userService;
 
-@GET
-public Response getApiKey(UUID apiKey) {
-    return null;
+    @GET
+    public Response getAllUsers() {
+
+        List<ApiUser> users = userService.findAll();
+
+        if (users.isEmpty()) {
+            return Response.noContent().build();
+        }
+
+        return Response.ok(users).build();
+
+    }
+
+    // @POST
+    // public Response createUser() {
+        
+    // } 
+
 }
-
-
-}
+// System.out.println(apiKey);
+// userService.getApiKey(apiKey);
+// return Response.ok(apiKey).build();

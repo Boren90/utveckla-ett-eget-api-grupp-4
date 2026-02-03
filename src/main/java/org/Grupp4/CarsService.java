@@ -11,7 +11,6 @@ import jakarta.transaction.Transactional;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
-@Named
 public class CarsService {
 
     @Inject
