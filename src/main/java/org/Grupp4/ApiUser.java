@@ -5,6 +5,7 @@ import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
@@ -16,9 +17,10 @@ public class ApiUser {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 private UUID apiKey;
+@Size(min= 4, max = 99)
 private String userName;
+@Size(min= 4, max = 99)
 private String userPassword;
-
 
 
 public Long getId() {
