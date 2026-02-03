@@ -23,6 +23,14 @@ public class CarsService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
+    public Cars updateCarInfo(CarsDTO carsDTO, Long id) {
+        Cars cars = entityManager.find(Cars.class, id);
+        cars.setTrivia(carsDTO.getNewTrivia());
+        cars.setValue(carsDTO.getNewValue());
+        return cars;
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
     public Cars createCar(Cars cars) {
         cars.setVinNumber(UUID.randomUUID());
         entityManager.persist(cars);
