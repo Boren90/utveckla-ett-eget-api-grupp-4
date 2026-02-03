@@ -38,7 +38,7 @@ public class CarsResource {
     }
 
     @POST
-    public Response createNewCar(Cars cars) throws URISyntaxException {
+    public Response createNewCar(@Valid Cars cars) throws URISyntaxException {
 
         cars = carsService.createCar(cars);
         URI createdUri = new URI(cars.getVinNumber().toString());

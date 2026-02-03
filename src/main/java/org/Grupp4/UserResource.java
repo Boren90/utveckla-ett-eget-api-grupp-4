@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -36,7 +38,7 @@ public class UserResource {
     }
 
     @POST
-    public Response createUser(ApiUser apiUser) throws URISyntaxException{
+    public Response createUser(@Valid ApiUser apiUser) throws URISyntaxException{
         ApiUser user = userService.createNewUser(apiUser);
         URI createdUri = new URI(user.getApiKey().toString());
         return Response.created(createdUri).entity(user).build();
