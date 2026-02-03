@@ -1,10 +1,10 @@
-package org.Grupp4;
+package org.Grupp4.Car;
 
-public class CarsDTO {
+public class CarDTO {
     
     private String newTrivia;
     private String newValue;
-    
+
     public String getNewTrivia() {
         return newTrivia;
     }

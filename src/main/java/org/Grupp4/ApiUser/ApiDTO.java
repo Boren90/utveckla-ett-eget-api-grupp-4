@@ -1,4 +1,4 @@
-package org.Grupp4;
+package org.Grupp4.ApiUser;
 
 public class ApiDTO {
 

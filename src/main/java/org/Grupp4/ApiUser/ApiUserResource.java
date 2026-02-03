@@ -1,4 +1,4 @@
-package org.Grupp4;
+package org.Grupp4.ApiUser;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,10 +19,10 @@ import jakarta.ws.rs.core.Response;
 @Path("/api/key")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserResource {
+public class ApiUserResource {
 
     @Inject
-    UserService userService;
+    ApiUserService userService;
 
     @GET
     public Response getAllUsers() {

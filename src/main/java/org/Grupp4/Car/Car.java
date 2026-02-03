@@ -1,4 +1,4 @@
-package org.Grupp4;
+package org.Grupp4.Car;
 
 import java.util.UUID;
 
@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-public class Cars {
+public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

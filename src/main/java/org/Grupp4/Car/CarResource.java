@@ -1,4 +1,4 @@
-package org.Grupp4;
+package org.Grupp4.Car;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,15 +20,15 @@ import jakarta.ws.rs.core.Response;
 @Path("/api/hello")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class CarsResource {
+public class CarResource {
 
     @Inject
-    CarsService carsService;
+    CarService carService;
 
     @GET
     public Response getAllCars() {
 
-        List<Cars> cars = carsService.findAll();
+        List<Car> cars = carService.findAll();
 
         if(cars.isEmpty()) {
             return Response.noContent().build();
@@ -38,20 +38,20 @@ public class CarsResource {
     }
 
     @POST
-    public Response createNewCar(@Valid Cars cars) throws URISyntaxException {
+    public Response createNewCar(@Valid Car car) throws URISyntaxException {
 
-        cars = carsService.createCar(cars);
-        URI createdUri = new URI(cars.getVinNumber().toString());
-        return Response.created(createdUri).entity(cars).build();
+        car = carService.createCar(car);
+        URI createdUri = new URI(car.getVinNumber().toString());
+        return Response.created(createdUri).entity(car).build();
         
     }
     
     @PATCH
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateCarInfo(@PathParam("id") Long id, CarsDTO carsDTO) {
+    public Response updateCarInfo(@PathParam("id") Long id, CarDTO carsDTO) {
         System.out.println(carsDTO.getNewValue());
-        Cars cars = carsService.updateCarInfo(carsDTO, id);
+        Car cars = carService.updateCarInfo(carsDTO, id);
         return Response.ok(cars).build();
     }
 
@@ -59,7 +59,7 @@ public class CarsResource {
     @Path("/{id}")
     public Response deleteCar(@PathParam("id") Long id) {
 
-        carsService.deleteCar(id);
+        carService.deleteCar(id);
 
         return Response.noContent().build();
     }
