@@ -22,6 +22,13 @@ public class UserService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
+    public ApiUser createNewUser(ApiUser apiUser) {
+        apiUser.setApiKey(UUID.randomUUID());
+        entitymanager.persist(apiUser);
+        return apiUser;
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
     public UUID getApiKey(UUID apiKey) {
         ApiUser user = entitymanager.find(ApiUser.class, apiKey);
         return user.getApiKey();

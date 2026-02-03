@@ -1,5 +1,7 @@
 package org.Grupp4;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,10 +35,12 @@ public class UserResource {
 
     }
 
-    // @POST
-    // public Response createUser() {
-        
-    // } 
+    @POST
+    public Response createUser(ApiUser apiUser) throws URISyntaxException{
+        ApiUser user = userService.createNewUser(apiUser);
+        URI createdUri = new URI(user.getApiKey().toString());
+        return Response.created(createdUri).entity(user).build();
+    } 
 
 }
 // System.out.println(apiKey);
