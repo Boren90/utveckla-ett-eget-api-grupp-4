@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -43,6 +44,15 @@ public class CarsResource {
         URI createdUri = new URI(cars.getVinNumber().toString());
         return Response.created(createdUri).entity(cars).build();
         
+    }
+    
+    @PATCH
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateCarInfo(@PathParam("id") Long id, CarsDTO carsDTO) {
+        System.out.println(carsDTO.getNewValue());
+        Cars cars = carsService.updateCarInfo(carsDTO, id);
+        return Response.ok(cars).build();
     }
 
     @DELETE
