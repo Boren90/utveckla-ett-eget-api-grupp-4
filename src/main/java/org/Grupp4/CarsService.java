@@ -13,7 +13,7 @@ import jakarta.transaction.Transactional;
 @ApplicationScoped
 @Named
 public class CarsService {
-    
+
     @Inject
     EntityManager entityManager;
 
@@ -23,9 +23,14 @@ public class CarsService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-        public Cars createCar(Cars cars) {
-            cars.setVinNumber(UUID.randomUUID());
-            entityManager.persist(cars);
-            return cars;
-        }
+    public Cars createCar(Cars cars) {
+        cars.setVinNumber(UUID.randomUUID());
+        entityManager.persist(cars);
+        return cars;
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void deleteCar(Long id) {
+        entityManager.remove(entityManager.getReference(Cars.class, id));
+    }
 }

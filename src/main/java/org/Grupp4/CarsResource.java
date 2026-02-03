@@ -49,6 +49,8 @@ public class CarsResource {
     @Path("/{id}")
     public Response deleteCar(@PathParam("id") Long id) {
 
+        carsService.deleteCar(id);
+
         return Response.noContent().build();
     }
 }
