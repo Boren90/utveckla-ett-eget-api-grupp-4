@@ -28,47 +28,29 @@ public class ApiUserResource {
     ApiUserService userService;
 
     @GET
-    @Operation(
-        summary = "Hämtar alla användare",
-        description = "Hämtar alla användare från databasen"
-    )
-    @APIResponse(
-        responseCode = "200",
-        description = "Hittar alla användare från databasen"
-    )
-    @APIResponse(
-        responseCode = "204",
-        description = "Hittade inga användare"
-    )
-    public Response getUser() {
+    @Operation(summary = "Hämtar alla användare", description = "Hämtar alla användare från databasen")
+    @APIResponse(responseCode = "200", description = "Hittar alla användare från databasen")
+    @APIResponse(responseCode = "204", description = "Hittade inga användare")
+    public Response getUser(ApiUser apiUser) {
 
-        List<ApiUser> users = userService.findAll();
+        ApiUser user = userService.findByUsernameAndPassword(apiUser);
 
-        if (users.isEmpty()) {
-            return Response.noContent().build();
+        if (user == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Could not find password or username").build();
         }
 
-        return Response.ok(users).build();
+        return Response.ok(user).build();
 
     }
 
     @POST
-    @Operation(
-        summary = "Skapar en användare",
-        description = "Skapar en användare och sparar den i en kolumn i databasen"
-    )
-    @APIResponse(
-        responseCode = "201",
-        description = "Användare skapas"
-    )
-    @APIResponse(
-        responseCode = "400",
-        description = "Användare kan inte skapas, informationen som anges är felaktig"
-    )
-    public Response createUser(@Valid ApiUser apiUser) throws URISyntaxException{
+    @Operation(summary = "Skapar en användare", description = "Skapar en användare och sparar den i en kolumn i databasen")
+    @APIResponse(responseCode = "201", description = "Användare skapas")
+    @APIResponse(responseCode = "400", description = "Användare kan inte skapas, informationen som anges är felaktig")
+    public Response createUser(@Valid ApiUser apiUser) throws URISyntaxException {
         ApiUser user = userService.createNewUser(apiUser);
         URI createdUri = new URI(user.getApiKey().toString());
         return Response.created(createdUri).entity(user).build();
-    } 
+    }
 
 }

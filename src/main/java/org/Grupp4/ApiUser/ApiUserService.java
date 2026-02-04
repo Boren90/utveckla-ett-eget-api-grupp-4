@@ -7,7 +7,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
@@ -16,9 +18,17 @@ public class ApiUserService {
     @Inject
     EntityManager entitymanager;
 
-    public List<ApiUser> findAll() {
-        List<ApiUser> users = entitymanager.createQuery("SELECT u FROM ApiUser u", ApiUser.class).getResultList();
-        return users;
+    @Transactional(Transactional.TxType.REQUIRED)
+    public ApiUser findByUsernameAndPassword(ApiUser apiUser) {
+        try {
+        return entitymanager.createQuery("SELECT u FROM ApiUser u WHERE u.userName = :userName AND u.userPassword = :userPassword", ApiUser.class)
+        .setParameter("userName", apiUser.getUserName())
+        .setParameter("userPassword", apiUser.getUserPassword())
+        .getSingleResult();
+        }catch (NoResultException e) {
+            
+        return null;
+        }
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
