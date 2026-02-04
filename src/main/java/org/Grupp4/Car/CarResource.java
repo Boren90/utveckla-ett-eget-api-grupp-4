@@ -4,6 +4,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
@@ -17,7 +20,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/api/hello")
+@Path("/api/cars")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @ApiKeyRequired
@@ -27,10 +30,18 @@ public class CarResource {
     CarService carService;
 
     @GET
-    // @Operation(
-    //     summary = "summary",
-    //     description = "description"
-    // )
+    @Operation(
+        summary = "Hämtar alla bilar",
+        description = "Hämtar listan av bilar i databasen"
+    )
+    @APIResponse(
+        responseCode = "200",
+        description = "Hittar bilar"
+    )
+    @APIResponse(
+        responseCode = "204",
+        description = "Hittar inga bilar"
+    )
     public Response getAllCars() {
 
         List<Car> cars = carService.findAll();
@@ -43,6 +54,18 @@ public class CarResource {
     }
 
     @POST
+    @Operation(
+        summary = "Skapar en ny bil",
+        description = "Skapar en ny bil och sparar den på en ny kolumn i databasen"
+    )
+    @APIResponse(
+        responseCode = "201",
+        description = "Bil skapas"
+    )
+    @APIResponse(
+        responseCode = "400",
+        description = "Bil kan inte skapas"
+    )
     public Response createNewCar(@Valid Car car) throws URISyntaxException {
 
         car = carService.createCar(car);
@@ -52,6 +75,18 @@ public class CarResource {
     }
     
     @PATCH
+    @Operation(
+        summary = "Uppdaterar bilens information",
+        description = "Uppdaterar trivia och value i databasen"
+    )
+    @APIResponse(
+        responseCode = "200",
+        description = "Bilens information uppdateras"
+    )
+    @APIResponse(
+        responseCode = "400",
+        description = "Kan inte uppdatera bilen information"
+    )
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateCarInfo(@PathParam("id") Long id, CarDTO carsDTO) {
@@ -61,6 +96,14 @@ public class CarResource {
     }
 
     @DELETE
+    @Operation(
+        summary = "Tar bort en bil",
+        description = "Raderar en kolumn av objektet bil från databasen"
+    )
+    @APIResponse(
+        responseCode = "204",
+        description = "Bilen raderas"
+    )
     @Path("/{id}")
     public Response deleteCar(@PathParam("id") Long id) {
 
