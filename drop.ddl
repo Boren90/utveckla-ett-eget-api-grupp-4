@@ -3,4 +3,4 @@
 
     drop table if exists api_user cascade;
 
-    drop table if exists Cars cascade;
+    drop table if exists Car cascade;

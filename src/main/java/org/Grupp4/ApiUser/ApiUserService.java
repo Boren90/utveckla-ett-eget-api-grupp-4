@@ -1,4 +1,4 @@
-package org.Grupp4;
+package org.Grupp4.ApiUser;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
-public class UserService {
+public class ApiUserService {
 
     @Inject
     EntityManager entitymanager;

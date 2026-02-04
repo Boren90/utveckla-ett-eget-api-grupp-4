@@ -1,4 +1,4 @@
-package org.Grupp4;
+package org.Grupp4.Car;
 
 import java.util.UUID;
 
@@ -12,14 +12,14 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-public class Cars {
+public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UUID vinNumber;
-    @NotEmpty(message = "Every car has a name, and it's missing here!")
+    @Size(min= 2, max = 99, message = "Car name is too short or too long!")
     private String carBrand;
-    @NotEmpty(message = "Every car has a name, and it's missing here!")
+    @Size(min= 2, max = 99, message = "Every car has a name, and it's missing here!")
     private String carModel;
     private int year;
     @Size(min = 0)

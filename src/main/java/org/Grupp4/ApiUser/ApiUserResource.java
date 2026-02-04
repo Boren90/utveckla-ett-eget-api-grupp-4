@@ -1,4 +1,4 @@
-package org.Grupp4;
+package org.Grupp4.ApiUser;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -17,10 +19,10 @@ import jakarta.ws.rs.core.Response;
 @Path("/api/key")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserResource {
+public class ApiUserResource {
 
     @Inject
-    UserService userService;
+    ApiUserService userService;
 
     @GET
     public Response getAllUsers() {
@@ -36,7 +38,7 @@ public class UserResource {
     }
 
     @POST
-    public Response createUser(ApiUser apiUser) throws URISyntaxException{
+    public Response createUser(@Valid ApiUser apiUser) throws URISyntaxException{
         ApiUser user = userService.createNewUser(apiUser);
         URI createdUri = new URI(user.getApiKey().toString());
         return Response.created(createdUri).entity(user).build();
