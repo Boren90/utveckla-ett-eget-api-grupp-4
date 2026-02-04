@@ -22,6 +22,22 @@ You can run your application in dev mode that enables live coding using:
    - **Value:** [Your-Generated-UUID]
 3. **Manage Cars:** Use the /api/cars endpoints to GET, POST, PATCH, or DELETE cars. If the header is missing or the key is invalid, you will receive a 401 Unauthorized response.
 
+## Endpoint List
+
+### User Endpoints (Public)
+| Method | Endpoint | Description | Success Code | Auth |
+| :--- | :--- | :--- | :--- | :--- |
+| `POST` | `/api/user` | Register user & generate API Key | 201 Created | No |
+| `GET` | `/api/user` | Get user info by username and password | 200 OK | No |
+
+### Car Endpoints (Secured)
+| Method | Endpoint | Description | Success Code | Auth |
+| :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/api/cars` | Fetch all cars | 200 OK | **Yes** |
+| `POST` | `/api/cars` | Add a new car | 201 Created | **Yes** |
+| `PATCH` | `/api/cars/{id}` | Update car details | 200 OK | **Yes** |
+| `DELETE` | `/api/cars/{id}` | Remove car from database | 204 No Content | **Yes** |
+
 ## Create User JSON format
 
 ```json
@@ -32,6 +48,7 @@ You can run your application in dev mode that enables live coding using:
 ```
 
 ## Create Car JSON format
+Remeber to be able to create, update or delete your car you need to include the API key in the header
 ```json
 {
   "carBrand": "Volvo",
