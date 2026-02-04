@@ -9,11 +9,11 @@ If you want to learn more about Quarkus, please visit its website: <https://quar
 - Java 21
 - PostgreSQL database
 
-## Running the application in dev mode
+## Running the application
 
-You can run your application in dev mode that enables live coding using:
-
-./mvnw quarkus:dev
+1. Clone the repo
+2. After the project is started in your IDE of choice you need to start Docker desktop.
+3. After Docker is started open the terminal in the IDE and type ./mvnw quarkus:dev
 
 ## How to use the API
 1. **Create a User:** Send a POST request to /api/user with a username and password. The response will contain your unique apiKey.
@@ -72,9 +72,7 @@ Remeber to be able to create, update or delete your car you need to include the 
 - SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
 - JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
 
-## Our Githubs
-https://github.com/Tibbe90
-
-https://github.com/Apex145
-
-https://github.com/Kippzta
+## Developers
+- [Tibbe90](https://github.com/Tibbe90)
+- [Apex145](https://github.com/Apex145)
+- [Kippzta](https://github.com/Kippzta)
