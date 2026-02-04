@@ -20,12 +20,17 @@ import jakarta.ws.rs.core.Response;
 @Path("/api/hello")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@ApiKeyRequired
 public class CarResource {
 
     @Inject
     CarService carService;
 
     @GET
+    // @Operation(
+    //     summary = "summary",
+    //     description = "description"
+    // )
     public Response getAllCars() {
 
         List<Car> cars = carService.findAll();
