@@ -48,7 +48,7 @@ If you want to learn more about Quarkus, please visit its website: <https://quar
 ```
 
 ## Create Car JSON format
-Remeber to be able to create, update or delete your car you need to include the API key in the header
+Remember to be able to create, update or delete your car you need to include the API key in the header
 ```json
 {
   "carBrand": "Volvo",
