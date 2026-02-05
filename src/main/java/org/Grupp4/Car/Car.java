@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -17,7 +15,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private UUID vinNumber;
-    @Size(min= 2, max = 99, message = "Car name is too short or too long!")
+    @Size(min= 2, max = 99, message = "Car name is too long or too short")
     private String carBrand;
     @Size(min= 2, max = 99, message = "Every car has a name, and it's missing here!")
     private String carModel;

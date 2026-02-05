@@ -1,15 +1,12 @@
 package org.Grupp4.ApiUser;
 
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.core.Response;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped

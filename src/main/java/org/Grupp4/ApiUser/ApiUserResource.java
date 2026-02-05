@@ -2,14 +2,11 @@ package org.Grupp4.ApiUser;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.UUID;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import jakarta.inject.Inject;
-import jakarta.validation.Valid;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -28,9 +25,9 @@ public class ApiUserResource {
     ApiUserService userService;
 
     @GET
-    @Operation(summary = "Hämtar alla användare", description = "Hämtar alla användare från databasen")
-    @APIResponse(responseCode = "200", description = "Hittar alla användare från databasen")
-    @APIResponse(responseCode = "204", description = "Hittade inga användare")
+    @Operation(summary = "Fetches all users", description = "Fetches all users from the database")
+    @APIResponse(responseCode = "200", description = "Find all users from the database")
+    @APIResponse(responseCode = "204", description = "No users found")
     public Response getUser(ApiUser apiUser) {
 
         ApiUser user = userService.findByUsernameAndPassword(apiUser);
@@ -44,9 +41,9 @@ public class ApiUserResource {
     }
 
     @POST
-    @Operation(summary = "Skapar en användare", description = "Skapar en användare och sparar den i en kolumn i databasen")
-    @APIResponse(responseCode = "201", description = "Användare skapas")
-    @APIResponse(responseCode = "400", description = "Användare kan inte skapas, informationen som anges är felaktig")
+    @Operation(summary = "Creating a user", description = "Creating a user and saving it in the database")
+    @APIResponse(responseCode = "201", description = "User created")
+    @APIResponse(responseCode = "400", description = "User could not be created, the information provided is incorrect")
     public Response createUser(@Valid ApiUser apiUser) throws URISyntaxException {
         ApiUser user = userService.createNewUser(apiUser);
         URI createdUri = new URI(user.getApiKey().toString());

@@ -31,40 +31,59 @@ public class CarResource {
 
     @GET
     @Operation(
-        summary = "Hämtar alla bilar",
-        description = "Hämtar listan av bilar i databasen"
+        summary = "Gets all cars",
+        description = "Gets the list of all existing cars in the database"
     )
     @APIResponse(
         responseCode = "200",
-        description = "Hittar bilar"
+        description = "Found cars"
     )
     @APIResponse(
         responseCode = "204",
-        description = "Hittar inga bilar"
+        description = "Could not find cars"
     )
     public Response getAllCars() {
-
         List<Car> cars = carService.findAll();
-
         if(cars.isEmpty()) {
             return Response.noContent().build();
         }
+        return Response.ok(cars).build();
+    }
 
+    @GET
+    @Path("/search")
+    @Operation(
+        summary = "Fetches all cars of a specific brand",
+        description = "Fetching the list of cars the user is searching for"
+    )
+    @APIResponse(
+        responseCode = "200",
+        description = "Found cars"
+    )
+    @APIResponse(
+        responseCode = "204",
+        description = "Could not find cars"
+    )
+    public Response getCarsByBrand(Car car) {
+        List<Car> cars = carService.findByCarBrand(car);
+        if(cars.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("This brand does not exist, did you spell it right?").build();
+        }
         return Response.ok(cars).build();
     }
 
     @POST
     @Operation(
-        summary = "Skapar en ny bil",
-        description = "Skapar en ny bil och sparar den på en ny kolumn i databasen"
+        summary = "Creates a new car",
+        description = "Creates a new car, and saves it to a new colum in the database"
     )
     @APIResponse(
         responseCode = "201",
-        description = "Bil skapas"
+        description = "A car has been created"
     )
     @APIResponse(
         responseCode = "400",
-        description = "Bil kan inte skapas"
+        description = "A car could not be created"
     )
     public Response createNewCar(@Valid Car car) throws URISyntaxException {
 
@@ -76,33 +95,33 @@ public class CarResource {
     
     @PATCH
     @Operation(
-        summary = "Uppdaterar bilens information",
-        description = "Uppdaterar trivia och value i databasen"
+        summary = "Updates the car information",
+        description = "Updates the trivia and value in the database"
     )
     @APIResponse(
         responseCode = "200",
-        description = "Bilens information uppdateras"
+        description = "The cars information updated"
     )
     @APIResponse(
         responseCode = "400",
-        description = "Kan inte uppdatera bilen information"
+        description = "Could not update the car information"
     )
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateCarInfo(@PathParam("id") Long id, CarDTO carsDTO) {
-        System.out.println(carsDTO.getNewValue());
-        Car cars = carService.updateCarInfo(carsDTO, id);
-        return Response.ok(cars).build();
+    public Response updateCarInfo(@PathParam("id") Long id, CarDTO carDTO) {
+        System.out.println(carDTO.getNewValue());
+        Car car = carService.updateCarInfo(carDTO, id);
+        return Response.ok(car).build();
     }
 
     @DELETE
     @Operation(
-        summary = "Tar bort en bil",
-        description = "Raderar en kolumn av objektet bil från databasen"
+        summary = "Removes a car",
+        description = "Deletes an existing car from the database"
     )
     @APIResponse(
         responseCode = "204",
-        description = "Bilen raderas"
+        description = "Car deleted"
     )
     @Path("/{id}")
     public Response deleteCar(@PathParam("id") Long id) {

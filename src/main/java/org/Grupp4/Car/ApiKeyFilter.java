@@ -3,8 +3,6 @@ package org.Grupp4.Car;
 import java.io.IOException;
 import java.util.UUID;
 
-import org.Grupp4.ApiUser.ApiUser;
-
 import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;

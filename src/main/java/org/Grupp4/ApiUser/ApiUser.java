@@ -5,7 +5,6 @@ import java.util.UUID;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
