@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
@@ -18,6 +17,14 @@ public class CarService {
 
     public List<Car> findAll() {
         List<Car> cars = entityManager.createQuery("SELECT c FROM Car c", Car.class).getResultList();
+        return cars;
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public List<Car> findByCarBrand(Car car) {
+        List<Car> cars = entityManager.createQuery("SELECT c FROM Car c WHERE c.carBrand = :carBrand", Car.class)
+        .setParameter("carBrand", car.getCarBrand())
+        .getResultList();
         return cars;
     }
 
