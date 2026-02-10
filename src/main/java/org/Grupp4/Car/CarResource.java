@@ -2,6 +2,7 @@ package org.Grupp4.Car;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -47,6 +48,19 @@ public class CarResource {
         if(cars.isEmpty()) {
             return Response.noContent().build();
         }
+        return Response.ok(cars).build();
+    }
+
+    @GET
+    @Path("/sort")
+    public Response sortByModel() {
+          List<Car> cars = carService.findAll();
+        if(cars.isEmpty()) {
+            return Response.noContent().build();
+        }
+        
+        cars.sort(Comparator.comparing(Car::getCarModel));
+    
         return Response.ok(cars).build();
     }
 
